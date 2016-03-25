@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta content="text/html; charset=utf-8"
+          http-equiv="Content-Type">
+
+    <title>Load a page</title>
+
+    <style type="text/css">
+        .header_{position: fixed; width: 100%; top: 0; height: 30px; background: black; color: white; z-index: 9999}
+        .push_{margin-bottom: 30px}
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#getButton").click(function() {
+                $.ajax({url: "content?url=" + $("#urlInput").val(),
+                    success: function (result) {
+                        $("#externalPage").html(result);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+
+<div class="header_">
+    URL: <input id="urlInput" type="text">
+    <button id="getButton">Get the Page</button>
+</div>
+<div class="push_"></div>
+
+<div id="externalPage">
+ </div>
+
+
+</body>
+</html>
