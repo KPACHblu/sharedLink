@@ -9,7 +9,10 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @RestController
@@ -50,8 +53,13 @@ public class ContentController {
                 e.printStackTrace();
             }
         }
-
+        getHttpSession().setAttribute(ProxyFilter.ATTR_TARGET_URL, url);
         return result;
+    }
+
+    private static HttpSession getHttpSession() {
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return attr.getRequest().getSession(true);
     }
 
 }

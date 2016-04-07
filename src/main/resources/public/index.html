@@ -15,7 +15,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("#getButton").click(function() {
+            $("#getButton").click(function(event) {
+                event.preventDefault();
                 $.ajax({url: "content?url=" + $("#urlInput").val(),
                     success: function (result) {
                         $("#externalPage").html(result);
